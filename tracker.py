@@ -17,12 +17,6 @@ def get_netflow():
     data = {'ip':str(ip), 'submit':"Submit"}
     session = requests.Session()
     r = session.post('https://uncia.cc.ncu.edu.tw/dormnet/index.php?section=netflow', data = data)
-
-    # if r.status_code == requests.codes.ok:
-    #     with open('r.html', 'wb') as f:
-    #         f.write(r.content)
-    #         print('OK')
-
     soup = BeautifulSoup(r.content, 'html.parser')
     t = soup.find("td", string='24hr 總量').find_next_sibling("td").text
     print(t[t.find("(")+1:t.find(")")])
